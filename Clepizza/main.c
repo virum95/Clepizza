@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
 typedef struct{
 	char* nombre;
 	char size; /* 'p', 'm' o 'g'*/
@@ -22,33 +20,63 @@ typedef struct{
 }
 
 void handle_line(char *line) {
-  printf("%s", line);
+	printf("%s", line);
+	fflush(stdout);
 }
 
 int readFile(FILE* f) {
-    int size = 1024, pos;
-    int c;
-    char *buffer = (char *)malloc(size);
-    if(f) {
-      do { // read all lines in file
-        pos = 0;
-        do{ // read one line
-          c = fgetc(f);
-          if(c != EOF) buffer[pos++] = (char)c;
-          if(pos >= size - 1) { // increase buffer length - leave room for 0
-            size *=2;
-            buffer = (char*)realloc(buffer, size);
-          }
-        }while(c != EOF && c != '\n');
-        buffer[pos] = 0;
-        // line is now in buffer
-        handle_line(buffer);
-      } while(c != EOF);
-      fclose(f);
-    }
-    free(buffer);
-    return 0;
+	int size = 1024, pos;
+	int c;
+	char *buffer = (char *)malloc(size);
+	if(f) {
+		do { // read all lines in file
+			pos = 0;
+			do{ // read one line
+				c = fgetc(f);
+				if(c != EOF) buffer[pos++] = (char)c;
+				if(pos >= size - 1) { // increase buffer length - leave room for 0
+					size *=2;
+					buffer = (char*)realloc(buffer, size);
+				}
+			}while(c != EOF && c != '\n');
+			buffer[pos] = 0;
+			// line is now in buffer
+			handle_line(buffer);
+		} while(c != EOF);
+		fclose(f);
+	}
+	free(buffer);
+	return 0;
 }
+
+int readLine(FILE* f, int line) {
+	int size = 1024, pos;
+	int c;
+	int linea = 0;
+	char *buffer = (char *)malloc(size);
+	if(f) {
+		do { // read all lines in file
+			pos = 0;
+			do{ // read one line
+				c = fgetc(f);
+				if(c != EOF) buffer[pos++] = (char)c;
+				if(pos >= size - 1) { // increase buffer length - leave room for 0
+					size *=2;
+					buffer = (char*)realloc(buffer, size);
+				}
+			}while(c != EOF && c != '\n');
+			buffer[pos] = 0;
+			linea++;
+			// line is now in buffer
+			if((linea-1) == line) handle_line(buffer);
+		} while(c != EOF);
+		fclose(f);
+	}
+	free(buffer);
+	return 0;
+}
+
+
 
 
 
@@ -75,7 +103,7 @@ void iniciarPedido(int opcion){
 	case 1:
 
 		break;
-	//Pizza
+		//Pizza
 	case 2:
 		printf("Pizza\n___________________\n");
 		printf("1.- Especialidad.\n");
@@ -85,33 +113,34 @@ void iniciarPedido(int opcion){
 		scanf("%i", &opcion2);
 		if(opcion2 == 1){
 			readFile(fopen("Pizzas.txt","r"));
+			readLine(fopen("Pizzas.txt","r"), scanf("%i", &opcion2));
 		} else if(opcion2 == 2){
 			readFile(fopen("Ingredientes.txt","r"));
 		}
 		break;
-	//Entrante
+		//Entrante
 	case 3:
 		printf("Entrantes\n___________________\n");
 		break;
-	//Bebida
+		//Bebida
 	case 4:
 		printf("Bebidas\n___________________\n");
 
 		break;
-	//Postre
+		//Postre
 	case 5:
 		printf("Postres\n___________________\n");
 
 		break;
-	//Descuento
+		//Descuento
 	case 6:
 
 		break;
-	//Consultar Pedido
+		//Consultar Pedido
 	case 7:
 
 		break;
-	//Terminar y pagar
+		//Terminar y pagar
 	case 8:
 
 		break;
