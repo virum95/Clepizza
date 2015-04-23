@@ -67,8 +67,9 @@ int readLine(FILE* f, int line) {
 			}while(c != EOF && c != '\n');
 			buffer[pos] = 0;
 			linea++;
+			printf("%i - %i\n",linea,line);
 			// line is now in buffer
-			if((linea-1) == line) handle_line(buffer);
+			if((linea) == line) handle_line(buffer);
 		} while(c != EOF);
 		fclose(f);
 	}
@@ -113,7 +114,8 @@ void iniciarPedido(int opcion){
 		scanf("%i", &opcion2);
 		if(opcion2 == 1){
 			readFile(fopen("Pizzas.txt","r"));
-			readLine(fopen("Pizzas.txt","r"), scanf("%i", &opcion2));
+			scanf("%i", &opcion2);
+			readLine(fopen("Pizzas.txt","r"), opcion2);
 		} else if(opcion2 == 2){
 			readFile(fopen("Ingredientes.txt","r"));
 		}
