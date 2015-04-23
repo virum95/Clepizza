@@ -67,7 +67,7 @@ int readLine(FILE* f, int line) {
 			}while(c != EOF && c != '\n');
 			buffer[pos] = 0;
 			linea++;
-			printf("%i - %i\n",linea,line);
+			//printf("%i - %i\n",linea,line);
 			// line is now in buffer
 			if((linea) == line) handle_line(buffer);
 		} while(c != EOF);
