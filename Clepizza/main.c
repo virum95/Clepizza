@@ -21,6 +21,35 @@ typedef struct{
 
 }
 
+void handle_line(char *line) {
+  printf("%s", line);
+}
+
+int readFile(FILE* f) {
+    int size = 1024, pos;
+    int c;
+    char *buffer = (char *)malloc(size);
+    if(f) {
+      do { // read all lines in file
+        pos = 0;
+        do{ // read one line
+          c = fgetc(f);
+          if(c != EOF) buffer[pos++] = (char)c;
+          if(pos >= size - 1) { // increase buffer length - leave room for 0
+            size *=2;
+            buffer = (char*)realloc(buffer, size);
+          }
+        }while(c != EOF && c != '\n');
+        buffer[pos] = 0;
+        // line is now in buffer
+        handle_line(buffer);
+      } while(c != EOF);
+      fclose(f);
+    }
+    free(buffer);
+    return 0;
+}
+
 
 
 int mostrarMenu(){
@@ -54,11 +83,15 @@ void iniciarPedido(int opcion){
 		fflush(stdout);
 		//sscanf
 		scanf("%i", &opcion2);
+		if(opcion2 == 1){
+			readFile(fopen("Pizzas.txt","r"));
+		} else if(opcion2 == 2){
+			readFile(fopen("Ingredientes.txt","r"));
+		}
 		break;
 	//Entrante
 	case 3:
 		printf("Entrantes\n___________________\n");
-
 		break;
 	//Bebida
 	case 4:
