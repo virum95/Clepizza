@@ -67,7 +67,7 @@ int readLine(FILE* f, int line) {
 			}while(c != EOF && c != '\n');
 			buffer[pos] = 0;
 			linea++;
-			printf("%i - %i\n",linea,line);
+			// printf("%i - %i\n",linea,line);
 			// line is now in buffer
 			if((linea) == line) handle_line(buffer);
 		} while(c != EOF);
@@ -99,6 +99,7 @@ int mostrarMenu(){
 
 void iniciarPedido(int opcion){
 	int opcion2;
+	char seguir;
 	switch(opcion){
 	//Menu
 	case 1:
@@ -117,7 +118,16 @@ void iniciarPedido(int opcion){
 			scanf("%i", &opcion2);
 			readLine(fopen("Pizzas.txt","r"), opcion2);
 		} else if(opcion2 == 2){
-			readFile(fopen("Ingredientes.txt","r"));
+				readFile(fopen("Ingredientes.txt","r"));
+			do{
+				printf("Elija ingrediente: \n");
+				fflush(stdout);
+				scanf("%i", &opcion2);
+				readLine(fopen("Ingredientes.txt","r"), opcion2);
+				printf("¿Más ingredientes? (s/n)\n ");
+				fflush(stdout);
+				scanf("%c", &seguir);
+			} while(seguir != 'n');
 		}
 		break;
 		//Entrante
