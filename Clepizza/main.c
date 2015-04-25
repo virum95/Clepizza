@@ -144,10 +144,7 @@ int main(void){
 	printf("q.- Salir\n");
 	fflush(stdout);
 	//TODO: sscanf
-	scanf("%c", &opcion);
-	if( opcion == '1'){
-		iniciarPedido(mostrarMenu());
-	}
+
 
 
 	return 0;
