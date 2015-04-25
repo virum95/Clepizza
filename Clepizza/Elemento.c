@@ -7,14 +7,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Elemento.h"
 
-void handle_line(char *line) {
-	printf("%s", line);
-	fflush(stdout);
+
+void handle_line(char *line, char* e) {
+	strcpy(e, line);
 }
 
-int readFile(FILE* f) {
+int readFile(FILE* f, char* e) {
 	int size = 1024, pos;
 	int c;
 	char *buffer = (char *)malloc(size);
@@ -31,7 +32,7 @@ int readFile(FILE* f) {
 			}while(c != EOF && c != '\n');
 			buffer[pos] = 0;
 			// line is now in buffer
-			handle_line(buffer);
+			handle_line(buffer, e);
 		} while(c != EOF);
 		fclose(f);
 	}
@@ -47,11 +48,46 @@ void iniciarElementos (Elemento **arrayElementos, int size )
 	{
 		if(contadorTipo == 1)
 		{
+			readFile(fopen("Pizzas.txt", "r"),arrayElementos[0]->nombre);
+			arrayElementos[0]++;
 		}
 	}
 }
 
-void mostrarElemento()
+void mostrarElemento(Elemento e)
 {
+	switch (e.tipo) {
+	case 1:
+		printf("Pizza ");
+		break;
+	case 2:
+		printf("Entrante ");
+		break;
+	case 3:
+		printf("Bebida ");
+		break;
+	case 4:
+		printf("Postre ");
+		break;
+	case 5:
+		printf("Ingrediente ");
+		break;
+	default:
+		break;
+	}
+	switch (e.size) {
+	case 'p':
+		printf("pequeñ@: ");
+		break;
+	case 'm':
+		printf("median@: ");
+		break;
+	case 'g':
+		printf("grande: ");
+		break;
+	default:
+		break;
+	}
+	printf("%s. Precio: %f€.",e.nombre,e.precio);
 
 }

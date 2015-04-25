@@ -9,7 +9,7 @@
 #define ELEMENTO_H_
 
 typedef struct{
-	int tipo; //pizza = 1, entrante = 2, bebida = 3, postre = 4,
+	int tipo;
 	char* nombre;
 	char size; /* 'p', 'm' o 'g'*/
 	float precio;
@@ -17,6 +17,6 @@ typedef struct{
 
 void iniciarElementos ();
 
-void mostrarElemento ();
+void mostrarElemento (Elemento e);
 
 #endif /* ELEMENTO_H_ */
