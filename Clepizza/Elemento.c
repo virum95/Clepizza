@@ -12,6 +12,7 @@
 
 void handle_line(char *line, Elemento* e) {
 	strcpy(e->nombre, line);
+	//Jorca tonto
 }
 
 int readFile(FILE* f, Elemento* e) {
