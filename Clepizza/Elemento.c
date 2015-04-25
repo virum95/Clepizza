@@ -40,53 +40,52 @@ int readFile(FILE* f, Elemento* e) {
 	return 0;
 }
 
-void iniciarElementos (Elemento **arrayElementos, int size )
+void iniciarElementos (Elemento** arrayElementos, int size )
 {
 	int i;
 	int contadorTipo = 1;
-	for(i = 0;i<size;i++)
+	for(contadorTipo = 1;contadorTipo<=size;contadorTipo++)
 	{
 		if(contadorTipo == 1)
 		{
+			for(i = 0; i<10; i++)
+			{
 			readFile(fopen("Pizzas.txt", "r"), &arrayElementos[0]);
-			arrayElementos[0]++;
+			arrayElementos[contadorTipo-1]->tipo = contadorTipo;
+			arrayElementos[contadorTipo-1]++;
+			}
+		}
+		if(contadorTipo == 2)
+		{
+			for(i = 0; i<10; i++)
+			{
+			readFile(fopen("Entrantes.txt", "r"), &arrayElementos[0]);
+			arrayElementos[contadorTipo-1]->tipo = contadorTipo;
+			arrayElementos[contadorTipo-1]++;
+			}
+		}
+		if(contadorTipo == 3)
+		{
+			for(i = 0; i<10; i++)
+			{
+			readFile(fopen("Bebidas.txt", "r"), &arrayElementos[0]);
+			arrayElementos[contadorTipo-1]->tipo = contadorTipo;
+			arrayElementos[contadorTipo-1]++;
+			}
+		}
+		if(contadorTipo == 4)
+		{
+			for(i = 0; i<10; i++)
+			{
+			readFile(fopen("Postres.txt", "r"), &arrayElementos[0]);
+			arrayElementos[contadorTipo-1]->tipo = contadorTipo;
+			arrayElementos[contadorTipo-1]++;
+			}
 		}
 	}
 }
 
 void mostrarElemento(Elemento e)
 {
-	switch (e.tipo) {
-	case 1:
-		printf("Pizza ");
-		break;
-	case 2:
-		printf("Entrante ");
-		break;
-	case 3:
-		printf("Bebida ");
-		break;
-	case 4:
-		printf("Postre ");
-		break;
-	case 5:
-		printf("Ingrediente ");
-		break;
-	default:
-		break;
-	}
-	switch (e.size) {
-	case 'p':
-		printf("pequeñ@: ");
-		break;
-	case 'm':
-		printf("median@: ");
-		break;
-	case 'g':
-		printf("grande: ");
-		break;
-	default:
-		break;
-	}
-	printf("%s. Precio: %f€.",e.nombre,e.precio);
+	printf("%s",e.nombre);
 }
