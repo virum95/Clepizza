@@ -7,14 +7,14 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Elemento.h"
 
-char* handle_line(char *line) {
-	printf("%s", line);
-	fflush(stdout);
+char* handle_line(char *line, Elemento e) {
+	strcpy(&e, line);
 }
 
-int readFile(FILE* f) {
+int readFile(FILE* f, Elemento e) {
 	int size = 1024, pos;
 	int c;
 	char *buffer = (char *)malloc(size);
@@ -31,7 +31,7 @@ int readFile(FILE* f) {
 			}while(c != EOF && c != '\n');
 			buffer[pos] = 0;
 			// line is now in buffer
-			handle_line(buffer);
+			handle_line(buffer, e);
 		} while(c != EOF);
 		fclose(f);
 	}
