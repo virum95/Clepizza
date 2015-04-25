@@ -17,6 +17,6 @@ typedef struct{
 
 void iniciarElementos ();
 
-void mostrarElemento ();
+void mostrarElemento (Elemento e);
 
 #endif /* ELEMENTO_H_ */
