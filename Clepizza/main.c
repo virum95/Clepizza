@@ -15,8 +15,6 @@ typedef struct{
 
 }
 
-
-
 int readLine(FILE* f, int line) {
 	int size = 1024, pos;
 	int c;
@@ -134,14 +132,14 @@ void iniciarPedido(int opcion){
 
 int main(void){
 	char opcion;
-	Elemento arrayelementos[5][10];
+	Elemento arrayElementos[5][10];
 	printf("Bienvenido a ClePizza.\n\n");
 	printf("¿Qué desea hacer?\n");
 	printf("1.- Realizar un pedido.\n");
 	printf("q.- Salir\n");
 	fflush(stdout);
-	//TODO: sscanf
 
+	iniciarElementos(arrayElementos,5);
 
 
 	return 0;
