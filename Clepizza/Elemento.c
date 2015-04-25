@@ -10,8 +10,8 @@
 #include <string.h>
 #include "Elemento.h"
 
-char* handle_line(char *line, Elemento e) {
-	strcpy(&e, line);
+void handle_line(char *line, Elemento e) {
+	strcpy(e.nombre, line);
 }
 
 int readFile(FILE* f, Elemento e) {
@@ -53,7 +53,7 @@ void iniciarElementos (Elemento **arrayElementos, int size )
 
 void mostrarElemento(Elemento e)
 {
-	switch (e.) {
+	switch (e.tipo) {
 	case 1:
 		printf("Pizza ");
 		break;
