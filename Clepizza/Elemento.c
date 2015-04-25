@@ -48,7 +48,7 @@ void iniciarElementos (Elemento **arrayElementos, int size )
 	{
 		if(contadorTipo == 1)
 		{
-			readFile(fopen("Pizzas.txt", "r"), &arrayElementos[0]);
+			readFile(fopen("Pizzas.txt", "r"), arrayElementos[0]);
 			arrayElementos[0]++;
 		}
 	}
