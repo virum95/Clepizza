@@ -88,5 +88,4 @@ void mostrarElemento(Elemento e)
 		break;
 	}
 	printf("%s. Precio: %f€.",e.nombre,e.precio);
-
 }

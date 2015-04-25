@@ -10,6 +10,7 @@
 
 typedef struct{
 	int tipo;
+	//pizza = 1, entrante = 2, bebida = 3, postre = 4,
 	char* nombre;
 	char size; /* 'p', 'm' o 'g'*/
 	float precio;
