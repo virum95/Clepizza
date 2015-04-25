@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct{
 	char* nombre;
@@ -99,8 +100,8 @@ int mostrarMenu(){
 
 void iniciarPedido(int opcion){
 	int opcion2;
-	char op2;
-	char seguir;
+	char op2[3];
+	char seguir[3];
 	switch(opcion){
 	//Menu
 	case 1:
@@ -113,26 +114,25 @@ void iniciarPedido(int opcion){
 		printf("2.- Ingredientes.\n");
 		fflush(stdout);
 		//sscanf
-		fgets(op2, 2, stdin);
-		char *opcionf = malloc(sizeof(char));
-		sscanf(op2,"%c",opcionf);
-		//scanf("%i", &opcion2);
-		if(opcionf == 1){
+		//fgets(op2, 3, stdin);
+		//char *opcionf = malloc(3*sizeof(char));
+		//sscanf(op2,"%s",opcionf);
+		scanf("%s", &op2);
+		if(op2[0] == '1'){
 			readFile(fopen("Pizzas.txt","r"));
 			scanf("%i", &opcion2);
 			readLine(fopen("Pizzas.txt","r"), opcion2);
-		} else if(opcion2 == 2){
+		} else if(op2[0] == '2'){
 				readFile(fopen("Ingredientes.txt","r"));
 			do{
 				printf("Elija ingrediente: \n");
 				fflush(stdout);
-				fgets(op2, 1, stdin);
-				//scanf("%i", &opcion2);
+				scanf("%i", &opcion2);
 				readLine(fopen("Ingredientes.txt","r"), opcion2);
 				printf("¿Más ingredientes? (s/n)\n ");
 				fflush(stdout);
-				scanf("%c", &seguir);
-			} while(seguir != 'n');
+				scanf("%s", &seguir);
+			} while(seguir[0] != 'n');
 		}
 		break;
 		//Entrante
