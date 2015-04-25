@@ -125,6 +125,7 @@ void iniciarPedido(int opcion){
 				if(seguir != '\n'){
 					printf("\nElija ingrediente: ");
 					fflush(stdout);
+					fgets(opcion2, 1, stdin);
 					scanf("%i", &opcion2);
 					readLine(fopen("Ingredientes.txt","r"), opcion2);
 					printf("¿Más ingredientes? (s/n)\n ");
