@@ -10,11 +10,11 @@
 #include <string.h>
 #include "Elemento.h"
 
-void handle_line(char *line, Elemento e) {
-	strcpy(e.nombre, line);
+void handle_line(char *line, Elemento* e) {
+	strcpy(e->nombre, line);
+}
 
-
-int readFile(FILE* f, char* e) {
+int readFile(FILE* f, Elemento* e) {
 	int size = 1024, pos;
 	int c;
 	char *buffer = (char *)malloc(size);
@@ -47,7 +47,7 @@ void iniciarElementos (Elemento **arrayElementos, int size )
 	{
 		if(contadorTipo == 1)
 		{
-			readFile(fopen("Pizzas.txt", "r"),arrayElementos[0]->nombre);
+			readFile(fopen("Pizzas.txt", "r"), &arrayElementos[0]);
 			arrayElementos[0]++;
 		}
 	}
