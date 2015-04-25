@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include "Elemento.h"
 
-char* handle_line(char *line) {
+void handle_line(char *line) {
 	printf("%s", line);
 	fflush(stdout);
 }
