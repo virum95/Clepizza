@@ -131,8 +131,14 @@ void iniciarPedido(int opcion){
 }
 
 int main(void){
-	char opcion;
-	Elemento arrayElementos[5][10];
+
+	Elemento** arrayElementos;
+	arrayElementos = (Elemento**)malloc(sizeof(Elemento*)*5);
+	arrayElementos[0] = (Elemento*)malloc(sizeof(Elemento)*10);
+	arrayElementos[1] = (Elemento*)malloc(sizeof(Elemento)*10);
+	arrayElementos[2] = (Elemento*)malloc(sizeof(Elemento)*10);
+	arrayElementos[3] = (Elemento*)malloc(sizeof(Elemento)*10);
+	arrayElementos[4] = (Elemento*)malloc(sizeof(Elemento)*10);
 	printf("Bienvenido a ClePizza.\n\n");
 	printf("¿Qué desea hacer?\n");
 	printf("1.- Realizar un pedido.\n");
@@ -140,7 +146,7 @@ int main(void){
 	fflush(stdout);
 
 	iniciarElementos(arrayElementos,5);
-
+	mostrarElemento(arrayElementos[0][1]);
 
 	return 0;
 }
