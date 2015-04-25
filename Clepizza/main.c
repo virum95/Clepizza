@@ -67,7 +67,6 @@ int readLine(FILE* f, int line) {
 			}while(c != EOF && c != '\n');
 			buffer[pos] = 0;
 			linea++;
-			// printf("%i - %i\n",linea,line);
 			// line is now in buffer
 			if((linea) == line) handle_line(buffer);
 		} while(c != EOF);
@@ -99,6 +98,7 @@ int mostrarMenu(){
 
 void iniciarPedido(int opcion){
 	int opcion2;
+	char op2;
 	char seguir;
 	switch(opcion){
 	//Menu
@@ -112,26 +112,25 @@ void iniciarPedido(int opcion){
 		printf("2.- Ingredientes.\n");
 		fflush(stdout);
 		//sscanf
-		scanf("%i", &opcion2);
-		if(opcion2 == 1){
+		fgets(op2, 2, stdin);
+		char *opcionf = malloc(sizeof(char));
+		sscanf(op2,"%c",opcionf);
+		//scanf("%i", &opcion2);
+		if(opcionf == 1){
 			readFile(fopen("Pizzas.txt","r"));
 			scanf("%i", &opcion2);
 			readLine(fopen("Pizzas.txt","r"), opcion2);
 		} else if(opcion2 == 2){
-			readFile(fopen("Ingredientes.txt","r"));
+				readFile(fopen("Ingredientes.txt","r"));
 			do{
-				//TODO: Ayudia
-				seguir = 's';
-				if(seguir != '\n'){
-					printf("\nElija ingrediente: ");
-					fflush(stdout);
-					fgets(opcion2, 1, stdin);
-					scanf("%i", &opcion2);
-					readLine(fopen("Ingredientes.txt","r"), opcion2);
-					printf("¿Más ingredientes? (s/n)\n ");
-					fflush(stdout);
-					scanf("%c", &seguir);
-				}
+				printf("Elija ingrediente: \n");
+				fflush(stdout);
+				fgets(op2, 1, stdin);
+				//scanf("%i", &opcion2);
+				readLine(fopen("Ingredientes.txt","r"), opcion2);
+				printf("¿Más ingredientes? (s/n)\n ");
+				fflush(stdout);
+				scanf("%c", &seguir);
 			} while(seguir != 'n');
 		}
 		break;
