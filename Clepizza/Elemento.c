@@ -12,7 +12,6 @@
 
 void handle_line(char *line, Elemento* e) {
 	strcpy(e->nombre, line);
-	//Jorca tonto
 }
 
 int readFile(FILE* f, Elemento* e) {
@@ -44,13 +43,19 @@ int readFile(FILE* f, Elemento* e) {
 void iniciarElementos (Elemento** arrayElementos, int size )
 {
 	int i;
+	int j;
 	int contadorTipo = 1;
-	for(contadorTipo = 1;contadorTipo<=size;contadorTipo++)
+	for(i = 1; i<=size; i++)
 	{
 		if(contadorTipo == 1)
 		{
 			for(i = 0; i<10; i++)
 			{
+				for(j = 0; j<10; j++)
+				{
+					arrayElementos[i][j].tipo = i;
+					arrayElementos[i][j].nombre = (char*) malloc(sizeof(char)*20);
+				}
 			readFile(fopen("Pizzas.txt", "r"), arrayElementos[0]);
 			arrayElementos[contadorTipo-1]->tipo = contadorTipo;
 			arrayElementos[contadorTipo-1]++;
@@ -89,4 +94,5 @@ void iniciarElementos (Elemento** arrayElementos, int size )
 void mostrarElemento(Elemento e)
 {
 	printf("%s",e.nombre);
+	fflush(stdout);
 }

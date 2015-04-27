@@ -15,37 +15,6 @@ typedef struct{
 
 }
 
-int readLine(FILE* f, int line) {
-	int size = 1024, pos;
-	int c;
-	int linea = 0;
-	char *buffer = (char *)malloc(size);
-	if(f) {
-		do { // read all lines in file
-			pos = 0;
-			do{ // read one line
-				c = fgetc(f);
-				if(c != EOF) buffer[pos++] = (char)c;
-				if(pos >= size - 1) { // increase buffer length - leave room for 0
-					size *=2;
-					buffer = (char*)realloc(buffer, size);
-				}
-			}while(c != EOF && c != '\n');
-			buffer[pos] = 0;
-			linea++;
-			// line is now in buffer
-			if((linea) == line) handle_line(buffer);
-		} while(c != EOF);
-		fclose(f);
-	}
-	free(buffer);
-	return 0;
-}
-
-
-
-
-
 int mostrarMenu(){
 	int opcion;
 	printf("¿Qué desea pedir?\n");
@@ -64,9 +33,9 @@ int mostrarMenu(){
 
 void iniciarPedido(int opcion){
 
-	int opcion2;
-	char op2[3];
-	char seguir[3];
+	//int opcion2;
+	//char op2[3];
+	//char seguir[3];
 	switch(opcion){
 	//Menu
 	case 1:
@@ -80,26 +49,6 @@ void iniciarPedido(int opcion){
 		fflush(stdout);
 		//sscanf
 
-		//fgets(op2, 3, stdin);
-		//char *opcionf = malloc(3*sizeof(char));
-		//sscanf(op2,"%s",opcionf);
-		scanf("%s", &op2);
-		if(op2[0] == '1'){
-			readFile(fopen("Pizzas.txt","r"));
-			scanf("%i", &opcion2);
-			readLine(fopen("Pizzas.txt","r"), opcion2);
-		} else if(op2[0] == '2'){
-				readFile(fopen("Ingredientes.txt","r"));
-			do{
-				printf("Elija ingrediente: \n");
-				fflush(stdout);
-				scanf("%i", &opcion2);
-				readLine(fopen("Ingredientes.txt","r"), opcion2);
-				printf("¿Más ingredientes? (s/n)\n ");
-				fflush(stdout);
-				scanf("%s", &seguir);
-			} while(seguir[0] != 'n');
-		}
 		break;
 		//Entrante
 	case 3:
@@ -145,8 +94,10 @@ int main(void){
 	printf("q.- Salir\n");
 	fflush(stdout);
 
-	iniciarElementos(arrayElementos,5);
-	mostrarElemento(arrayElementos[0][1]);
+	iniciarElementos(arrayElementos,4);
+
+	mostrarElemento(arrayElementos[0][0]);
+	//mostrarElemento(arrayElementos[0][1]);
 
 	return 0;
 }
