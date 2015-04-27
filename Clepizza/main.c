@@ -84,10 +84,11 @@ int main(void){
 	Elemento** arrayElementos;
 	arrayElementos = (Elemento**)malloc(sizeof(Elemento*)*10);
 	arrayElementos[0] = (Elemento*)malloc(sizeof(Elemento)*50);
-	arrayElementos[1] = (Elemento*)malloc(sizeof(Elemento)*10);
-	arrayElementos[2] = (Elemento*)malloc(sizeof(Elemento)*10);
-	arrayElementos[3] = (Elemento*)malloc(sizeof(Elemento)*10);
+	arrayElementos[1] = (Elemento*)malloc(sizeof(Elemento)*50);
+	arrayElementos[2] = (Elemento*)malloc(sizeof(Elemento)*50);
+	arrayElementos[3] = (Elemento*)malloc(sizeof(Elemento)*50);
 	arrayElementos[4] = (Elemento*)malloc(sizeof(Elemento)*50);
+	arrayElementos[5] = (Elemento*)malloc(sizeof(Elemento)*50);
 	printf("Bienvenido a ClePizza.\n\n");
 	printf("¿Qué desea hacer?\n");
 	printf("1.- Realizar un pedido.\n");
@@ -98,5 +99,9 @@ int main(void){
 
 	mostrarElemento(arrayElementos[0][0]);
 	mostrarElemento(arrayElementos[1][2]);
-	return 0;
+	mostrarElemento(arrayElementos[2][2]);
+	mostrarElemento(arrayElementos[3][2]);
+	mostrarElemento(arrayElementos[4][2]);
+	mostrarElemento(arrayElementos[5][2]);
+return 0;
 }

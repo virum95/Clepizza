@@ -14,7 +14,7 @@ void handle_line(char *line, Elemento* e) {
 	//strcpy(e->nombre, line);
 	int i;
 
-	for(i = 0; i<15; i++)
+	for(i = 0; i<50; i++)
 	{
 		e->nombre[i] = line[i];
 	}
@@ -71,40 +71,49 @@ Elemento** iniciarElementos (Elemento** arrayElementos, int size )
 				arrayElementos[i][j] = readFile(fopen("Pizzas.txt", "r"), arrayElementos[i][j],j);
 			}
 		}
-		if(contadorTipo == 5)
-		{
-			for(i = 0; i<10; i++)
-			{
-				//	readFile(fopen("Entrantes.txt", "r"), arrayElementos[0]);
-				arrayElementos[contadorTipo-1]->tipo = contadorTipo;
-				arrayElementos[contadorTipo-1]++;
-			}
-		}
-		if(contadorTipo == 3)
-		{
-			for(i = 0; i<10; i++)
-			{
-				//	readFile(fopen("Bebidas.txt", "r"), arrayElementos[0]);
-				arrayElementos[contadorTipo-1]->tipo = contadorTipo;
-				arrayElementos[contadorTipo-1]++;
-			}
-		}
-		if(contadorTipo == 4)
-		{
-			for(i = 0; i<10; i++)
-			{
-				//		readFile(fopen("Postres.txt", "r"), arrayElementos[0]);
-				arrayElementos[contadorTipo-1]->tipo = contadorTipo;
-				arrayElementos[contadorTipo-1]++;
-			}
-		}
 		if(contadorTipo == 2)
 		{
 			for(j = 0; j<50; j++)
 			{
 				arrayElementos[i][j].tipo = contadorTipo;
 				arrayElementos[i][j].nombre = (char*) malloc(sizeof(char)*50);
+				arrayElementos[i][j] = readFile(fopen("Entrantes.txt", "r"), arrayElementos[i][j],j);
+			}
+		}
+		if(contadorTipo == 3)
+		{
+			for(j = 0; j<50; j++)
+			{
+				arrayElementos[i][j].tipo = contadorTipo;
+				arrayElementos[i][j].nombre = (char*) malloc(sizeof(char)*50);
+				arrayElementos[i][j] = readFile(fopen("Bebidas.txt", "r"), arrayElementos[i][j],j);
+			}
+		}
+		if(contadorTipo == 4)
+		{
+			for(j = 0; j<50; j++)
+			{
+				arrayElementos[i][j].tipo = contadorTipo;
+				arrayElementos[i][j].nombre = (char*) malloc(sizeof(char)*50);
+				arrayElementos[i][j] = readFile(fopen("Postres.txt", "r"), arrayElementos[i][j],j);
+			}
+		}
+		if(contadorTipo == 5)
+		{
+			for(j = 0; j<50; j++)
+			{
+				arrayElementos[i][j].tipo = contadorTipo;
+				arrayElementos[i][j].nombre = (char*) malloc(sizeof(char)*50);
 				arrayElementos[i][j] = readFile(fopen("Ingredientes.txt", "r"), arrayElementos[i][j],j);
+			}
+		}
+		if(contadorTipo == 6)
+		{
+			for(j = 0; j<50; j++)
+			{
+				arrayElementos[i][j].tipo = contadorTipo;
+				arrayElementos[i][j].nombre = (char*) malloc(sizeof(char)*50);
+				arrayElementos[i][j] = readFile(fopen("Menus.txt", "r"), arrayElementos[i][j],j);
 			}
 		}
 
