@@ -51,7 +51,7 @@ void iniciarElementos (Elemento** arrayElementos, int size )
 		{
 			for(i = 0; i<10; i++)
 			{
-		//	readFile(fopen("Pizzas.txt", "r"), arrayElementos[0]);
+			readFile(fopen("Pizzas.txt", "r"), arrayElementos[0]);
 			arrayElementos[contadorTipo-1]->tipo = contadorTipo;
 			arrayElementos[contadorTipo-1]++;
 			}
