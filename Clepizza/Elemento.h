@@ -10,11 +10,11 @@
 
 typedef struct{
 	int tipo;
-	//pizza = 1, entrante = 2, bebida = 3, postre = 4,
+	//pizza = 1, entrante = 2, bebida = 3, postre = 4, ingrediente = 5
 	char* nombre;
 } Elemento;
 
-void iniciarElementos ();
+Elemento** iniciarElementos (Elemento** arrayElementos, int size );
 
 void mostrarElemento (Elemento e);
 
