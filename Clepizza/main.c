@@ -4,6 +4,7 @@
 #include "Elemento.h"
 
 static float precioTotal = 0;
+static int numeroPedido = 0;
 
 /*??*/ void mostrarPedido(){
 
@@ -12,6 +13,7 @@ static float precioTotal = 0;
 void elegirTamanyo(int tipo){
 	char op[3];
 	if(tipo == 4){ precioTotal+=1.5;} else {
+		do{
 		printf("Introduce el tamaño: (s, m, b)\n");
 		fflush(stdout);
 		scanf("%s", &op);
@@ -40,6 +42,7 @@ void elegirTamanyo(int tipo){
 		default:
 			break;
 		}
+		}while(op[0]!='s' && op[0]!='m' && op[0]!='b');
 	}
 }
 
@@ -62,12 +65,10 @@ int mostrarMenu(){
 }
 
 
-
 char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 {
 	FILE * fp;
 	int numero=0;
-	int numeroPedido = 0;
 	int opcion2;
 	char op2[3];
 	char seguir[3];
@@ -89,7 +90,11 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 		elegirTamanyo(6);
 
 		//AÑADIR AL PEDIDO
-		pedido[numeroPedido] = arrayelementos[0][numero-1];
+
+		pedido[numeroPedido].tipo = arrayelementos[5][numero-1].tipo;
+		pedido[numeroPedido].nombre = arrayelementos[5][numero-1].nombre;
+
+		printf("%s", pedido[numeroPedido].nombre);
 		numeroPedido++;
 
 		printf("¿Desea hacer alguna operación más?(s/n)\n");//CONTROL DESPUES DE COMPRAR CUALQUIER COSA.
@@ -255,7 +260,7 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 		printf("Introduce un codigo de descuento(5 caracteres):");
 		fflush(stdout);
 		scanf("%s",&codigo);
-		if(codigo=="GBR95"){
+		if(codigo=="RGB95"){
 			printf("Descuento del 20% aplicado con exito");
 			precioTotal*=0.8;
 		}else{
@@ -267,7 +272,8 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 		//Consultar Pedido
 	case 7:
 		printf("Tu pedido actual es : \n");
-		for(i = 0; i <numeroPedido; i++)
+
+		for(i = 0; i < numeroPedido; i++)
 		{
 			printf("%s",pedido[i].nombre);
 			fflush(stdout);
@@ -276,15 +282,13 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 		break;
 		//Terminar y pagar
 	case 8:
-
 		fp = fopen ("Factura.txt", "w");
 		fprintf(fp, "\t Clepizza++ \n");
 		fprintf(fp, "\t __________ \n");
-		int i;
-		for(i = 0 ; i<numeroPedido; i++)
-		{
-			fprintf(fp, pedido[numeroPedido].nombre);
+		for (i = 0; i < numeroPedido; ++i) {
+			fprintf(fp,pedido[i].nombre);
 		}
+		iniciarPedido(arrayelementos, 7, pedido);
 
 		fprintf(fp, "\n\n Precio final: %f", precioTotal);
 
@@ -317,6 +321,7 @@ int main(void){
 	printf("q.- Salir\n");
 	fflush(stdout);
 
+
 	arrayElementos = iniciarElementos(arrayElementos,10);
 	char op[3];
 	fgets(op,3,stdin);
@@ -324,23 +329,22 @@ int main(void){
 		do{
 			seguir = iniciarPedido(arrayElementos,mostrarMenu(), pedido);
 		}while(seguir=='s');
-		iniciarPedido(arrayElementos,8,pedido);
+		iniciarPedido(arrayElementos, 8, pedido);
 	}
 
 	//Liberar memoria
 	int i;
 	int j;
-	for(i = 0; i<=6; i++)
+	for(i = 0; i<6; i++)
 	{
 		for(j = 0; j<50; j++)
 		{
-			//free(arrayElementos[i][j].nombre);
+			free(arrayElementos[i][j].nombre);
 			//da error
-		}
 		free(arrayElementos[i]);
 	}
 	free(arrayElementos);
-
+	}
 	return 0;
 }
 
