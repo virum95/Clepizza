@@ -33,6 +33,7 @@ int readFile(FILE* f, Elemento* e) {
 			buffer[pos] = 0;
 			// line is now in buffer
 			handle_line(buffer, e);
+			e++;
 		} while(c != EOF);
 		fclose(f);
 	}
@@ -50,7 +51,7 @@ void iniciarElementos (Elemento** arrayElementos, int size )
 		{
 			for(i = 0; i<10; i++)
 			{
-			readFile(fopen("Pizzas.txt", "r"), &arrayElementos[0]);
+		//	readFile(fopen("Pizzas.txt", "r"), arrayElementos[0]);
 			arrayElementos[contadorTipo-1]->tipo = contadorTipo;
 			arrayElementos[contadorTipo-1]++;
 			}
@@ -59,7 +60,7 @@ void iniciarElementos (Elemento** arrayElementos, int size )
 		{
 			for(i = 0; i<10; i++)
 			{
-			readFile(fopen("Entrantes.txt", "r"), &arrayElementos[0]);
+		//	readFile(fopen("Entrantes.txt", "r"), arrayElementos[0]);
 			arrayElementos[contadorTipo-1]->tipo = contadorTipo;
 			arrayElementos[contadorTipo-1]++;
 			}
@@ -68,7 +69,7 @@ void iniciarElementos (Elemento** arrayElementos, int size )
 		{
 			for(i = 0; i<10; i++)
 			{
-			readFile(fopen("Bebidas.txt", "r"), &arrayElementos[0]);
+	//	readFile(fopen("Bebidas.txt", "r"), arrayElementos[0]);
 			arrayElementos[contadorTipo-1]->tipo = contadorTipo;
 			arrayElementos[contadorTipo-1]++;
 			}
@@ -77,7 +78,7 @@ void iniciarElementos (Elemento** arrayElementos, int size )
 		{
 			for(i = 0; i<10; i++)
 			{
-			readFile(fopen("Postres.txt", "r"), &arrayElementos[0]);
+	//		readFile(fopen("Postres.txt", "r"), arrayElementos[0]);
 			arrayElementos[contadorTipo-1]->tipo = contadorTipo;
 			arrayElementos[contadorTipo-1]++;
 			}
