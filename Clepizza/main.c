@@ -19,21 +19,21 @@ void elegirTamanyo(int tipo){
 		case 's':
 			if(tipo == 1) precioTotal+=7;
 			if(tipo == 2) precioTotal+=3;
-			if(tipo == 4) precioTotal+=1.5;
+			if(tipo == 3) precioTotal+=1.5;
 			if(tipo == 5) precioTotal+=3;
 			if(tipo == 6) precioTotal+=10;
 			break;
 		case 'm':
 			if(tipo == 1) precioTotal+=10;
 			if(tipo == 2) precioTotal+=4;
-			if(tipo == 4) precioTotal+=2;
+			if(tipo == 3) precioTotal+=2;
 			if(tipo == 5) precioTotal+=3.5;
 			if(tipo == 6) precioTotal+=15;
 			break;
 		case 'b':
 			if(tipo == 1) precioTotal+=13;
 			if(tipo == 2) precioTotal+=5;
-			if(tipo == 4) precioTotal+=3.5;
+			if(tipo == 3) precioTotal+=3.5;
 			if(tipo == 5) precioTotal+=4.5;
 			if(tipo == 6) precioTotal+=20;
 			break;
@@ -233,7 +233,6 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 		elegirTamanyo(4);
 		//AÑADIR AL PEDIDO
 		pedido[numeroPedido] = arrayelementos[3][numero-1];
-		printf("%s",pedido[numeroPedido].nombre);
 		numeroPedido++;
 
 		printf("¿Desea hacer alguna operación más?(s/n)\n");//CONTROL DESPUES DE COMPRAR CUALQUIER COSA.
