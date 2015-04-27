@@ -65,6 +65,7 @@ char iniciarPedido(Elemento** arrayelementos, int opcion){
 	int opcion2;
 	char op2[3];
 	char seguir[3];
+	char codigo[7];
 	int i;
 	switch(opcion){
 	//Menu
@@ -87,7 +88,7 @@ char iniciarPedido(Elemento** arrayelementos, int opcion){
 				return 's';
 			}
 			else if(op2[0]=='n'){
-				iniciarPedido(arrayelementos,8);
+				return 'n';
 			}
 			else{
 				printf("Error en el caracter introducido, introduzca 's' para Si y 'n' para No");
@@ -136,8 +137,7 @@ char iniciarPedido(Elemento** arrayelementos, int opcion){
 				return 's';
 			}
 			else if(op2[0]=='n'){
-				iniciarPedido(arrayelementos,8);
-			}
+				return 'n';			}
 			else{
 				printf("Error en el caracter introducido, introduzca 's' para Si y 'n' para No");
 			}
@@ -163,8 +163,7 @@ char iniciarPedido(Elemento** arrayelementos, int opcion){
 				return 's';
 			}
 			else if(op2[0]=='n'){
-				iniciarPedido(arrayelementos,8);
-			}
+				return 'n';			}
 			else{
 				printf("Error en el caracter introducido, introduzca 's' para Si y 'n' para No");
 			}
@@ -190,8 +189,7 @@ char iniciarPedido(Elemento** arrayelementos, int opcion){
 				return 's';
 			}
 			else if(op2[0]=='n'){
-				iniciarPedido(arrayelementos,8);
-			}
+				return 'n';			}
 			else{
 				printf("Error en el caracter introducido, introduzca 's' para Si y 'n' para No");
 			}
@@ -217,7 +215,7 @@ char iniciarPedido(Elemento** arrayelementos, int opcion){
 				return 's';
 			}
 			else if(op2[0]=='n'){
-				iniciarPedido(arrayelementos,8);
+				return 'n';
 			}
 			else{
 				printf("Error en el caracter introducido, introduzca 's' para Si y 'n' para No");
@@ -226,6 +224,16 @@ char iniciarPedido(Elemento** arrayelementos, int opcion){
 		break;
 		//Descuento
 	case 6:
+		printf("Introduce un codigo de descuento(5 caracteres):");
+		fflush(stdout);
+		scanf("%s",&codigo);
+		if(codigo=="GBR95"){
+			printf("Descuento del 20% aplicado con exito");
+			precioTotal*=0.8;
+		}else{
+			printf("Codigo de descuento erroneo");
+		}
+
 		return 'n';
 		break;
 		//Consultar Pedido
@@ -264,8 +272,8 @@ int main(void){
 	if (op[0]=='1') {
 		do{
 			seguir=iniciarPedido(arrayElementos,mostrarMenu());
-			printf("%c",seguir);
 		}while(seguir=='s');
+		iniciarPedido(arrayElementos,8);
 	}
 
 	//Liberar memoria
@@ -275,7 +283,7 @@ int main(void){
 	{
 		for(j = 0; j<50; j++)
 		{
-			free(arrayElementos[i][j].nombre);
+			//free(arrayElementos[i][j].nombre);
 			//da error
 		}
 		free(arrayElementos[i]);
