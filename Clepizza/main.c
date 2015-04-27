@@ -267,9 +267,10 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 		//Consultar Pedido
 	case 7:
 		printf("Tu pedido actual es : \n");
-		for(i = 0; i <5; i++)
+		for(i = 0; i <numeroPedido; i++)
 		{
 			printf("%s",pedido[i].nombre);
+			fflush(stdout);
 		}
 		return 's';
 		break;
