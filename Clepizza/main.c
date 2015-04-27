@@ -3,23 +3,45 @@
 #include <string.h>
 #include "Elemento.h"
 
-typedef struct{
-	Elemento entrante;
-	Elemento pizza;
-	Elemento bebida;
-	Elemento postre;
-	float precio;
-} Menu;
+static float precioTotal = 0;
 
 /*??*/ void mostrarPedido(){
 
 }
 
-void controlError(char* opcion){
-	if(opcion[0]!='s' || opcion[0]!='n'){
-		printf("Error en el caracter introducido, introduzca 's' para Si y 'n' para No");
+void elegirTamanyo(int tipo){
+	char op;
+	if(tipo == 4){ precioTotal+=1.5;} else {
+		printf("Introduce el tamaño: (s, m, g)\n");
+		scanf("%c", &op);
+		switch (op) {
+		case 's':
+			if(tipo == 1) precioTotal+=7;
+			if(tipo == 2) precioTotal+=3;
+			if(tipo == 3) precioTotal+=1.5;
+			if(tipo == 5) precioTotal+=3;
+			if(tipo == 6) precioTotal+=10;
+			break;
+		case 'm':
+			if(tipo == 1) precioTotal+=10;
+			if(tipo == 2) precioTotal+=4;
+			if(tipo == 3) precioTotal+=2;
+			if(tipo == 5) precioTotal+=3.5;
+			if(tipo == 6) precioTotal+=15;
+			break;
+		case 'g':
+			if(tipo == 1) precioTotal+=13;
+			if(tipo == 2) precioTotal+=5;
+			if(tipo == 3) precioTotal+=3.5;
+			if(tipo == 5) precioTotal+=4.5;
+			if(tipo == 6) precioTotal+=20;
+			break;
+		default:
+			break;
+		}
 	}
 }
+
 
 int mostrarMenu(){
 	int opcion;
@@ -36,6 +58,7 @@ int mostrarMenu(){
 	scanf("%i", &opcion);
 	return opcion;
 }
+
 
 char iniciarPedido(Elemento** arrayelementos, int opcion){
 	int numero=0;
@@ -87,24 +110,6 @@ char iniciarPedido(Elemento** arrayelementos, int opcion){
 			numero = (int)op2[0];
 			numero-=48;
 			printf("%s", arrayelementos[0][numero-1].nombre);
-			printf("Elija el tamaño (g/m/p)");
-			fflush(stdout);
-			scanf("%s",&op2);
-			//TODO meter al archivo
-			printf("¿Desea hacer alguna operación más?(s/n)\n");//CONTROL DESPUES DE COMPRAR CUALQUIER COSA.
-			do{
-				fflush(stdout);
-				scanf("%s",&op2);
-				if(op2[0]=='s'){
-					return 's';
-				}
-				else if(op2[0]=='n'){
-					iniciarPedido(arrayelementos,8);
-				}
-				else{
-					printf("Error en el caracter introducido, introduzca 's' para Si y 'n' para No");
-				}
-			}while(op2[0]!='s' || op2[0]!='n');
 		} else if(op2[0] == '2'){//Ingredientes
 			do{
 				printf("Elija ingrediente: \n");
@@ -118,26 +123,27 @@ char iniciarPedido(Elemento** arrayelementos, int opcion){
 				fflush(stdout);
 				scanf("%s", &seguir);
 			} while(seguir[0] != 'n');
-			printf("Elija el tamaño (g/m/p)");
+		}
+		printf("Elija el tamaño (g/m/p)");
+		fflush(stdout);
+		scanf("%s",&op2);
+		//TODO meter al archivo
+		printf("¿Desea hacer alguna operación más?(s/n)\n");//CONTROL DESPUES DE COMPRAR CUALQUIER COSA.
+		do{
 			fflush(stdout);
 			scanf("%s",&op2);
-			//TODO meter al archivo
-			printf("¿Desea hacer alguna operación más?(s/n)\n");//CONTROL DESPUES DE COMPRAR CUALQUIER COSA.
-			do{
-				fflush(stdout);
-				scanf("%s",&op2);
-				if(op2[0]=='s'){
-					return 's';
-				}
-				else if(op2[0]=='n'){
-					iniciarPedido(arrayelementos,8);
-				}
-				else{
-					printf("Error en el caracter introducido, introduzca 's' para Si y 'n' para No");
-				}
-			}while(op2[0]!='s' || op2[0]!='n');
-			break;
-			//Entrante
+			if(op2[0]=='s'){
+				return 's';
+			}
+			else if(op2[0]=='n'){
+				iniciarPedido(arrayelementos,8);
+			}
+			else{
+				printf("Error en el caracter introducido, introduzca 's' para Si y 'n' para No");
+			}
+		}while(op2[0]!='s' || op2[0]!='n');
+		break;
+		//Entrante
 	case 3:
 		printf("Entrantes\n___________________\n");
 		for (i = 0; i < 6; ++i) {
@@ -220,19 +226,19 @@ char iniciarPedido(Elemento** arrayelementos, int opcion){
 		break;
 		//Descuento
 	case 6:
-
+		return 'n';
 		break;
 		//Consultar Pedido
 	case 7:
-
+		return 'n';
 		break;
 		//Terminar y pagar
 	case 8:
-
+		return 'n';
 		break;
-		}
 	}
 }
+
 
 int main(void){
 
@@ -253,12 +259,29 @@ int main(void){
 
 	arrayElementos = iniciarElementos(arrayElementos,10);
 	char op[3];
-	scanf("%s",&op);
-	if (op[0]=='1') { //TODO
+	fgets(op,3,stdin);
+	//scanf("%s",&op);
+	if (op[0]=='1') {
 		do{
 			seguir=iniciarPedido(arrayElementos,mostrarMenu());
+			printf("%c",seguir);
 		}while(seguir=='s');
 	}
+
+	//Liberar memoria
+	int i;
+	int j;
+	for(i = 0; i<=6; i++)
+	{
+		for(j = 0; j<50; j++)
+		{
+			free(arrayElementos[i][j].nombre);
+			//da error
+		}
+		free(arrayElementos[i]);
+	}
+	free(arrayElementos);
+
 	return 0;
 }
 

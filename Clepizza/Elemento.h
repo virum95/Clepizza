@@ -10,7 +10,7 @@
 
 typedef struct{
 	int tipo;
-	//pizza = 1, entrante = 2, bebida = 3, postre = 4, ingrediente = 5
+	//pizza = 1, entrante = 2, bebida = 3, postre = 4, ingrediente = 5, menus = 6
 	char* nombre;
 } Elemento;
 
