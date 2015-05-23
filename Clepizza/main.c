@@ -5,7 +5,7 @@
 
 static float precioTotal = 0;
 static int numeroPedido = 0;
-
+static char descuento[6]= {'R','G','B','9','5','\0'};
 /*??*/ void mostrarPedido(){
 
 }
@@ -14,34 +14,34 @@ void elegirTamanyo(int tipo){
 	char op[3];
 	if(tipo == 4){ precioTotal+=1.5;} else {
 		do{
-		printf("Introduce el tamaño: (s, m, b)\n");
-		fflush(stdout);
-		scanf("%s", &op);
-		switch (op[0]) {
-		case 's':
-			if(tipo == 1) precioTotal+=7;
-			if(tipo == 2) precioTotal+=3;
-			if(tipo == 3) precioTotal+=1.5;
-			if(tipo == 5) precioTotal+=3;
-			if(tipo == 6) precioTotal+=10;
-			break;
-		case 'm':
-			if(tipo == 1) precioTotal+=10;
-			if(tipo == 2) precioTotal+=4;
-			if(tipo == 3) precioTotal+=2;
-			if(tipo == 5) precioTotal+=3.5;
-			if(tipo == 6) precioTotal+=15;
-			break;
-		case 'b':
-			if(tipo == 1) precioTotal+=13;
-			if(tipo == 2) precioTotal+=5;
-			if(tipo == 3) precioTotal+=3.5;
-			if(tipo == 5) precioTotal+=4.5;
-			if(tipo == 6) precioTotal+=20;
-			break;
-		default:
-			break;
-		}
+			printf("Introduce el tamaño: (s, m, b)\n");
+			fflush(stdout);
+			scanf("%s", &op);
+			switch (op[0]) {
+			case 's':
+				if(tipo == 1) precioTotal+=7;
+				if(tipo == 2) precioTotal+=3;
+				if(tipo == 3) precioTotal+=1.5;
+				if(tipo == 5) precioTotal+=3;
+				if(tipo == 6) precioTotal+=10;
+				break;
+			case 'm':
+				if(tipo == 1) precioTotal+=10;
+				if(tipo == 2) precioTotal+=4;
+				if(tipo == 3) precioTotal+=2;
+				if(tipo == 5) precioTotal+=3.5;
+				if(tipo == 6) precioTotal+=15;
+				break;
+			case 'b':
+				if(tipo == 1) precioTotal+=13;
+				if(tipo == 2) precioTotal+=5;
+				if(tipo == 3) precioTotal+=3.5;
+				if(tipo == 5) precioTotal+=4.5;
+				if(tipo == 6) precioTotal+=20;
+				break;
+			default:
+				break;
+			}
 		}while(op[0]!='s' && op[0]!='m' && op[0]!='b');
 	}
 }
@@ -62,12 +62,13 @@ int mostrarMenu(){
 	fflush(stdout);
 	scanf("%i", &opcion);
 	return opcion;
+
 }
 
 
 char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 {
-	FILE * fp;
+	FILE* fp;
 	int numero=0;
 	int opcion2;
 	char op2[3];
@@ -86,7 +87,6 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 		scanf("%s",&op2);
 		numero = (int)op2[0];
 		numero-=48;
-		printf("%s", arrayelementos[5][numero-1].nombre);
 		elegirTamanyo(6);
 
 		//AÑADIR AL PEDIDO
@@ -94,7 +94,6 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 		pedido[numeroPedido].tipo = arrayelementos[5][numero-1].tipo;
 		pedido[numeroPedido].nombre = arrayelementos[5][numero-1].nombre;
 
-		printf("%s", pedido[numeroPedido].nombre);
 		numeroPedido++;
 
 		printf("¿Desea hacer alguna operación más?(s/n)\n");//CONTROL DESPUES DE COMPRAR CUALQUIER COSA.
@@ -127,8 +126,6 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 			scanf("%s",&op2);
 			numero = (int)op2[0];
 			numero-=48;
-			printf("%s", arrayelementos[0][numero-1].nombre);
-
 			//AÑADIR AL PEDIDO
 			pedido[numeroPedido] = arrayelementos[0][numero-1];
 			numeroPedido++;
@@ -146,9 +143,14 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 				fflush(stdout);
 				scanf("%s", &seguir);
 			} while(seguir[0] != 'n');
+			//AÑADIR AL PEDIDO
+
+			pedido[numeroPedido].nombre="Pizza al gusto";
+			pedido[numeroPedido].tipo=1;
+			numeroPedido++;
 		}
+
 		elegirTamanyo(1);
-		//TODO meter al archivo
 		printf("¿Desea hacer alguna operación más?(s/n)\n");//CONTROL DESPUES DE COMPRAR CUALQUIER COSA.
 		do{
 			fflush(stdout);
@@ -173,7 +175,6 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 		scanf("%s",&op2);
 		numero = (int)op2[0];
 		numero-=48;
-		printf("%s", arrayelementos[1][numero-1].nombre);
 		elegirTamanyo(2);
 		//AÑADIR AL PEDIDO
 		pedido[numeroPedido] = arrayelementos[1][numero-1];
@@ -203,7 +204,6 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 		scanf("%s",&op2);
 		numero = (int)op2[0];
 		numero-=48;
-		printf("%s", arrayelementos[2][numero-1].nombre);
 
 		//AÑADIR AL PEDIDO
 		pedido[numeroPedido] = arrayelementos[2][numero-1];
@@ -234,7 +234,6 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 		scanf("%s",&op2);
 		numero = (int)op2[0];
 		numero-=48;
-		printf("%s", arrayelementos[3][numero-1].nombre);
 		elegirTamanyo(4);
 		//AÑADIR AL PEDIDO
 		pedido[numeroPedido] = arrayelementos[3][numero-1];
@@ -257,10 +256,13 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 		break;
 		//Descuento
 	case 6:
+
 		printf("Introduce un codigo de descuento(5 caracteres):");
 		fflush(stdout);
 		scanf("%s",&codigo);
-		if(codigo=="RGB95"){
+		int i;
+		if(strlen(codigo)==6){
+		if(codigo==descuento){
 			printf("Descuento del 20% aplicado con exito");
 			precioTotal*=0.8;
 		}else{
@@ -282,16 +284,15 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 		break;
 		//Terminar y pagar
 	case 8:
+		printf("COMPRUEBA TU PEDIDO EN LA FACTURA");
 		fp = fopen ("Factura.txt", "w");
 		fprintf(fp, "\t Clepizza++ \n");
 		fprintf(fp, "\t __________ \n");
-		for (i = 0; i < numeroPedido; ++i) {
-			fprintf(fp,pedido[i].nombre);
+		for(i = 0; i < numeroPedido; i++)
+		{
+			fprintf(fp, "%s",pedido[i].nombre);
 		}
-		iniciarPedido(arrayelementos, 7, pedido);
-
 		fprintf(fp, "\n\n Precio final: %f", precioTotal);
-
 		fclose(fp);
 		return 'n';
 		break;
@@ -322,6 +323,7 @@ int main(void){
 	fflush(stdout);
 
 
+
 	arrayElementos = iniciarElementos(arrayElementos,10);
 	char op[3];
 	fgets(op,3,stdin);
@@ -340,11 +342,17 @@ int main(void){
 		for(j = 0; j<50; j++)
 		{
 			free(arrayElementos[i][j].nombre);
-			//da error
+
+		}
 		free(arrayElementos[i]);
 	}
-	free(arrayElementos);
+	for(j = 0; j<50; j++)
+	{
+		free(pedido[j].nombre);
 	}
+	free(arrayElementos);
+
+	free(pedido);
 	return 0;
 }
-
+}
