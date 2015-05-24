@@ -5,7 +5,7 @@
 
 static float precioTotal = 0;
 static int numeroPedido = 0;
-static char descuento[6]= {'R','G','B','9','5','\0'};
+static char descuento[5]= {'R','G','B','9','5'};
 /*??*/ void mostrarPedido(){
 
 }
@@ -256,13 +256,17 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 		break;
 		//Descuento
 	case 6:
-
 		printf("Introduce un codigo de descuento(5 caracteres):");
 		fflush(stdout);
 		scanf("%s",&codigo);
+		int d=1;
 		int i;
-		if(strlen(codigo)==6){
-		if(codigo==descuento){
+		for (i = 0; i < 5; ++i) {
+			if(codigo[i]!=descuento[i]){
+				d=0;
+			}
+		}
+		if(d==1){
 			printf("Descuento del 20% aplicado con exito");
 			precioTotal*=0.8;
 		}else{
@@ -284,7 +288,7 @@ char iniciarPedido(Elemento** arrayelementos, int opcion, Elemento* pedido)
 		break;
 		//Terminar y pagar
 	case 8:
-		printf("COMPRUEBA TU PEDIDO EN LA FACTURA");
+
 		fp = fopen ("Factura.txt", "w");
 		fprintf(fp, "\t Clepizza++ \n");
 		fprintf(fp, "\t __________ \n");
@@ -355,4 +359,4 @@ int main(void){
 	free(pedido);
 	return 0;
 }
-}
+
